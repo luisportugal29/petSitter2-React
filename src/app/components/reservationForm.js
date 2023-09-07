@@ -31,10 +31,14 @@ const ReservationForm = () => {
            </div>
            <div>
                 <ToggleGroup 
-                 options={[{name: 'Perros', icon: PetsIcon}, {name: 'Gatos'},{name: 'Aves'}]}
-                 setValue={setPetType}
-                 btnStyle
+                 options={
+                  [{name: 'Perros', icon: PetsIcon}, {name: 'Gatos', icon: PetsIcon},{name: 'Aves', icon: PetsIcon}]}
+                  setValue={setPetType}
+                  btnStyle
                 />
+           </div>
+           <div>
+                <button>Contratar a Esmeralda</button>
            </div>
         </div>
     )

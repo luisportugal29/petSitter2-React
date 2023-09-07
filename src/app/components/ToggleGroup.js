@@ -5,11 +5,22 @@ const ToggleGroup = ({ options, setValue, btnStyle }) => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
     
-
+    
 
     const handleSelectedValue = (newValue, index) => {
         setCurrentIndex(index);
         setValue(newValue);
+    };
+
+    const setIconStyle = (index) => {
+        let style = 'absolute top-3 left-3 ';
+
+        if ( btnStyle ){
+            return  `${style} ${currentIndex === index ? 'text-verde': 'text-gris'}`;
+        }
+
+        return `${style} ${currentIndex === index ? 'text-white': 'text-gris'}`;
+
     };
 
     return (
@@ -19,7 +30,7 @@ const ToggleGroup = ({ options, setValue, btnStyle }) => {
                  key={ index }
                  className="relative">
                     {option.icon && <option.icon 
-                     className={`absolute top-3 left-3   ${currentIndex === index ? 'text-white': 'text-gris'}`} /> }
+                     className={ setIconStyle(index)} /> }
                     <button
                      className={ btnStyle ? 
                         `h-12 w-40 text-verde ${currentIndex === index ? 'border-b-2 border': ''}}`: 
