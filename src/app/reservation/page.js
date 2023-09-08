@@ -7,8 +7,10 @@ const Reservation = () => {
     return (
         <div className="h-screen bg-crema">
             <NavBar />
-            <h1 className="text-4xl text-verde font-bold">Reserva</h1>
-            <ReservationForm />
+            <div className="pl-44 pt-16">
+                <h1 className="text-5xl text-verde font-bold mb-12">Reserva</h1>
+                <ReservationForm />
+            </div>
         </div>
     );
 };

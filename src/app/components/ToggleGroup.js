@@ -20,7 +20,6 @@ const ToggleGroup = ({ options, setValue, btnStyle }) => {
         }
 
         return `${style} ${currentIndex === index ? 'text-white': 'text-gris'}`;
-
     };
 
     return (
@@ -33,8 +32,8 @@ const ToggleGroup = ({ options, setValue, btnStyle }) => {
                      className={ setIconStyle(index)} /> }
                     <button
                      className={ btnStyle ? 
-                        `h-12 w-40 text-verde ${currentIndex === index ? 'border-b-2 border': ''}}`: 
-                        `h-12 w-40
+                        `h-14 w-52 text-verde ${currentIndex === index ? 'border-b-2 border-verde border': ''}}`: 
+                        `h-14 w-52
                         ${index === 0 ? 'rounded-tl-xl rounded-bl-xl' : ''}
                         ${index === (options.length - 1) ? 'rounded-tr-xl rounded-br-xl' : ''}
                         ${currentIndex === index ? 'bg-mostaza text-white' : 'bg-white text-gris border border-2'}` 
