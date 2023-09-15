@@ -11,7 +11,7 @@ import ShopIcon from '@mui/icons-material/Shop';
 
 const SideBar = () => {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [options, setOptions] = useState([
         {
             name: 'Mensajes',

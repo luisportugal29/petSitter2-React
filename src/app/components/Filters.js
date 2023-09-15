@@ -1,16 +1,39 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import SearchIcon from '@mui/icons-material/Search';
 import PinDropIcon from '@mui/icons-material/PinDrop';
+import { filterSitters } from "../../redux/features/sitters-slice";
 
 const FilterList = () => {
 
+    const dispatch = useDispatch();
+
     const [name, setName] = useState('');
-    const  [location, setLocation] = useState('');
+    const [location, setLocation] = useState('');
+    const [typingTimeOut, setTypingTimeOut] = useState(null);
+
+
+    useEffect(() => {
+        
+        clearTimeout(typingTimeOut);
+
+        setTypingTimeOut( setTimeout( () => {
+            const queryParams = {
+                ...(name && { name }),
+                ...(location && { location })
+            };
+            
+            if ( Object.keys(queryParams).length )  
+                dispatch(filterSitters(queryParams));
+            
+        }, 400));
+
+    }, [name, location]);
 
     return (
-        <div className="flex my-4">
-            <div className="relative mr-16">
+        <div className="flex flex-col md:flex-row items-center gap-y-2  my-2 md:my-4">
+            <div className="relative md:mr-16">
                 <SearchIcon className="absolute top-3 left-3" />
                 <input 
                 className="w-80 h-12 bg-white border border-verde rounded rounded-2xl pl-14 focus:outline-none"
