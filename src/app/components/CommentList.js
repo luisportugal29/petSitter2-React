@@ -3,68 +3,8 @@ import React, { useState } from "react";
 import { Rating } from "@mui/material";
 import Comment from '../components/Comment';
 
-const CommentList = () => {
-
-    const [rating, setRating] = useState(5);
-    const [comments, setComments] = useState([
-        {
-            id: 1,
-            text: `Esmeralda es una profesional del cuidado de casas. Es una grande comunicadora
-            , puntual, amable, limpiay lo mas importante es muy cariñosa con olive.`,
-            location: 'Culicán Sin',
-            date: '23-04-2023',
-            photoUrl: ''
-        },
-        {
-            id: 2,
-            text: `Esmeralda es una profesional del cuidado de casas. Es una grande comunicadora
-            , puntual, amable, limpiay lo mas importante es muy cariñosa con olive.`,
-            location: 'Culicán Sin',
-            date: '23-04-2023',
-            photoUrl: ''
-        },
-        {
-            id: 3,
-            text: `Esmeralda es una profesional del cuidado de casas. Es una grande comunicadora
-            , puntual, amable, limpiay lo mas importante es muy cariñosa con olive.`,
-            location: 'Culicán Sin',
-            date: '23-04-2023',
-            photoUrl: ''
-        },
-        {
-            id: 4,
-            text: `Esmeralda es una profesional del cuidado de casas. Es una grande comunicadora
-            , puntual, amable, limpiay lo mas importante es muy cariñosa con olive.`,
-            location: 'Culicán Sin',
-            date: '23-04-2023',
-            photoUrl: ''
-        },
-        {
-            id: 5,
-            text: `Esmeralda es una profesional del cuidado de casas. Es una grande comunicadora
-            , puntual, amable, limpiay lo mas importante es muy cariñosa con olive.`,
-            location: 'Culicán Sin',
-            date: '23-04-2023',
-            photoUrl: ''
-        },
-        {
-            id: 6,
-            text: `Esmeralda es una profesional del cuidado de casas. Es una grande comunicadora
-            , puntual, amable, limpiay lo mas importante es muy cariñosa con olive.`,
-            location: 'Culicán Sin',
-            date: '23-04-2023',
-            photoUrl: ''
-        },
-        {
-            id: 7,
-            text: `Esmeralda es una profesional del cuidado de casas. Es una grande comunicadora
-            , puntual, amable, limpiay lo mas importante es muy cariñosa con olive.`,
-            location: 'Culicán Sin',
-            date: '23-04-2023',
-            photoUrl: ''
-        }
-    ]);
-
+const CommentList = ({comments}) => {
+    
     return (
         <div className="h-[39rem] overflow-y-auto">
             <Rating 

@@ -1,11 +1,14 @@
 
 import React from "react";
 import { Rating } from "@mui/material";
+import Link from "next/link";
 
 const SitterListElement = ({sitter}) => {
-
+    
     return (
-        <div className="mb-2 md:mb-4 mx-2">
+        <Link 
+        href={sitter ?  `/sitter/${sitter.id}` : '/sitters'}
+        className="mb-2 md:mb-4 mx-2 cursor-pointer">
             <div className={sitter ? 'flex md:grid grid-cols-6 rounded-lg bg-white shadow-xl py-2': 'hidden md:grid md:grid-cols-6 md:mb-8'}>
                 <div className="flex justify-center items-center px-2 md:px-0">
                     { sitter ? (<div className="w-12 h-12 md:h-14 md:w-14 rounded-full bg-gris"></div> ) : (<span>Cuidador</span>)}
@@ -45,7 +48,7 @@ const SitterListElement = ({sitter}) => {
                     }
                 </div>
             </div>
-        </div>
+        </Link>
     );
 }
 

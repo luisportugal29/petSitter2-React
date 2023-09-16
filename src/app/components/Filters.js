@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import SearchIcon from '@mui/icons-material/Search';
 import PinDropIcon from '@mui/icons-material/PinDrop';
-import { filterSitters } from "../../redux/features/sitters-slice";
+import { fetchSitters, filterSitters } from "../../redux/features/sitters-slice";
 
 const FilterList = () => {
 
@@ -13,15 +13,19 @@ const FilterList = () => {
     const [location, setLocation] = useState('');
     const [typingTimeOut, setTypingTimeOut] = useState(null);
 
-
     useEffect(() => {
-        
+       
         clearTimeout(typingTimeOut);
+
+        if (!name && !location) {
+            dispatch(fetchSitters())
+            return;
+        }
 
         setTypingTimeOut( setTimeout( () => {
             const queryParams = {
                 ...(name && { name }),
-                ...(location && { location })
+                ...(location && { city: location })
             };
             
             if ( Object.keys(queryParams).length )  
