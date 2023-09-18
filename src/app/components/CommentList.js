@@ -6,10 +6,10 @@ import Comment from '../components/Comment';
 const CommentList = ({comments}) => {
     
     return (
-        <div className="h-[39rem] overflow-y-auto">
+        <div className="h-[39rem] overflow-y-auto mt-8">
             <Rating 
              name="sitter-rating"
-             value={rating}
+             value={4}
              readOnly
             />
             <p className="text-sm mt-2 mb-4">117 valoraciones<span className="text-sky-500">(Comentarios mostrados)</span></p>

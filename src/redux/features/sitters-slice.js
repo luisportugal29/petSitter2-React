@@ -7,6 +7,7 @@ const initialState = {
     value: {
         sitters: [],
         sitter: null,
+        currentPhoto: '',
     }
 };
 
@@ -43,6 +44,9 @@ const sitters = createSlice({
     reducers: {
         setSitters: (state, action) => {
             state.value.sitters = action.payload;
+        },
+        setCurrentPhoto: (state,action) => {
+            state.value.currentPhoto = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -55,7 +59,7 @@ const sitters = createSlice({
     }
 });
 
-export const { setSitters } = sitters.actions;
+export const { setSitters, setCurrentPhoto } = sitters.actions;
 
 const changeState = (state, action) => {state.value.sitters = action.payload};
 
