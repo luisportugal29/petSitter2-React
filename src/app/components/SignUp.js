@@ -1,8 +1,9 @@
 "use client"
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const SignUp = () => {
-
+    const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
     const [address, setAddress] = useState('');
@@ -23,6 +24,10 @@ const SignUp = () => {
 
      const signUp = (e) => {
         e.preventDefault();
+
+        const user = { name, lastName, address, phoneNumber, email, password };
+        
+
     };
 
     return (
