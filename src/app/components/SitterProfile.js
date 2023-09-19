@@ -13,33 +13,14 @@ import CommentList from './CommentList';
 const Profile = () => {
 
     const dispatch = useDispatch();
-    // const { id } = useParams();
+    const { id } = useParams();
 
-    //const sitter = useSelector(state => state.sitter.value.sitter);
+    const sitter = useSelector(state => state.sitter.value.sitter);
     const currentPhoto = useSelector(state => state.sitter.value.currentPhoto);
 
-    const sitter = {
-        name: 'Jesus Ivan Portugal Vega',
-        comments: [{id: 1 , text: 'Es un pro',date: '2023-05-04',location:'Culiacan Sinaloa'}, 
-        {id: 2, text: 'Alimenta bien a las mascotas',date:'2023-01-26',location:'Los Mochis'},
-        {id: 3, text: 'Alimenta bien a las mascotas',date:'2023-01-26',location:'Los Mochis'},
-        {id: 4, text: 'Alimenta bien a las mascotas',date:'2023-01-26',location:'Los Mochis'},
-        {id: 5, text: 'Alimenta bien a las mascotas',date:'2023-01-26',location:'Los Mochis'},
-        {id: 6, text: 'Alimenta bien a las mascotas',date:'2023-01-26',location:'Los Mochis'},
-        {id: 7, text: 'Alimenta bien a las mascotas',date:'2023-01-26',location:'Los Mochis'},
-        {id: 8, text: 'Alimenta bien a las mascotas',date:'2023-01-26',location:'Los Mochis'}
-        ],
-        photos: ['https://www.infobae.com/new-resizer/tH_BkMA8QjLtu7O7H-ATGiruAmQ=/arc-anglerfish-arc2-prod-infobae/public/B4HX46IDJRGIPO5AQ4UXXVDIDI.jpg',
-        'https://www.infobae.com/new-resizer/tH_BkMA8QjLtu7O7H-ATGiruAmQ=/arc-anglerfish-arc2-prod-infobae/public/B4HX46IDJRGIPO5AQ4UXXVDIDI.jpg'],
-        city: 'Culiacan Sinaloa',
-        description: 'Me gusta mucho el futbol y la f1 soy mega fan de checo perez',
-        skills: ['Musculoso','Futbolista','Responsable','Amoroso'],
-
-    };
-
-    // useEffect(() => {
-    //     dispatch(fetchSitter(id));
-    // },[ id ]);
+    useEffect(() => {
+        dispatch(fetchSitter(id));
+    },[ id ]);
 
     return (
         <>
@@ -55,14 +36,14 @@ const Profile = () => {
                 <img
                 className="rounded-xl"
                   src={currentPhoto} 
-                  alt="Checo Perez"
+                  alt="sitter picture"
                   loading="lazy"
                 />
             </div>
             )}
                 <div className="w-1/2 ">
                     <SitterPhotos photos={sitter.photos} />
-                    <CommentList comments={sitter.comments} />
+                    <CommentList comments={sitter.comments} rating={sitter.rating} />
                 </div>
                 <div className="w-1/4 ml-8">
                     <div>

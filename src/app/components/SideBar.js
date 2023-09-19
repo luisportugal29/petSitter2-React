@@ -1,5 +1,6 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import LogoutIcon from '@mui/icons-material/Logout';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import GroupsIcon from '@mui/icons-material/Groups';
@@ -8,42 +9,68 @@ import LoginIcon from '@mui/icons-material/Login';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import AppleIcon from '@mui/icons-material/Apple';
 import ShopIcon from '@mui/icons-material/Shop';
+import { setShowSideBar } from "../../redux/features/ui-slice";
+import Link from "next/link";
 
 const SideBar = () => {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const disptach = useDispatch();
+    const showSideBar = useSelector(state => state.ui.value.showSideBar);
+    const isAuth = useSelector(state => state.auth.value.isAuth);
+    const componentRef = useRef(null);
+
     const [options, setOptions] = useState([
         {
             name: 'Mensajes',
             status: true,
+            href: '/messages',
             icon: EmailIcon,
         },
         {
             name: 'Cuidadores',
             status: true,
+            href: '/sitters',
             icon: GroupsIcon,
         },
         {
             name: 'Agendados',
             status: true,
+            href: '/booked',
             icon: CalendarMonthIcon,
         },
         {
             name: 'Regístrate',
             status: false,
+            href: '/signup',
             icon: PersonAddAlt1Icon,
         },
         {
             name: 'Iniciar sesión',
             status: false,
+            href: '/signin',
             icon: LoginIcon,
         }
     ]);
 
+    const handleExternalClick = (event) => {
+        if ( componentRef.current && !componentRef.current.contains(event.target) )
+            disptach(setShowSideBar(false));
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleExternalClick);
+
+        return () => document.removeEventListener('mousedown', handleExternalClick);
+    },[]);
+
    return (
-        <div className="fixed flex flex-col w-80 top-0 bottom-0 bg-white z-30">
-            <div className="h-36 flex bg-crema justify-center items-center pt-10">
-                {isLoggedIn ? (
+        <>
+        {showSideBar && (
+            <div 
+            ref={componentRef}
+            className="fixed flex flex-col w-80 top-0 bottom-0 left-0 bg-white z-30">
+                <div className="h-36 flex bg-crema justify-center items-center pt-10">
+                {isAuth ? (
                     <>
                         <div className="flex">
                             <div className="h-12 w-12 bg-gris rounded-full border-2 border-verde"></div>
@@ -64,9 +91,10 @@ const SideBar = () => {
                 )} 
             </div>
             <div className="grow flex flex-col items-center pt-8">
-                { options.map((option, index) => ( option.status === isLoggedIn ? (
-                    <div 
+                { options.map((option, index) => ( option.status === isAuth ? (
+                    <Link
                      key={index}
+                     href={option.href}
                      className="w-52 h-16 relative my-4">
                         <option.icon 
                         className="text-4xl text-verde absolute top-3 left-2" 
@@ -74,12 +102,12 @@ const SideBar = () => {
                         <button className="w-full h-full text-verde">
                             { option.name }
                         </button>
-                    </div>
+                    </Link>
                     ): null
                 ))}
             </div>
             <div className="h-36 border-t border-gris mx-4 flex justify-center">
-                {isLoggedIn ? (
+                {isAuth ? (
                      <div className="w-52 h-16 relative my-4">
                         <LogoutIcon className="text-4xl text-verde absolute top-3 left-2" />
                         <button className="w-full h-full text-verde">
@@ -104,6 +132,8 @@ const SideBar = () => {
                 )}
             </div>
         </div>
+        )}
+        </>
    );
 };
 

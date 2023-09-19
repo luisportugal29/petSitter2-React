@@ -3,9 +3,7 @@ import axios from 'axios';
 import NavBar from '../components/NavBar';
 import SitterList from '../components/SitterList';
 import SitterInfo from '../components/SitterInfo';
-import SideBar from '../components/SideBar';
-import { setSitters } from "../../redux/features/sitters-slice";
-import { useDispatch } from "react-redux";
+import SideBar from '../components/SideBar'; 
 
 export const Sitters = async () => {
 
@@ -14,10 +12,10 @@ export const Sitters = async () => {
 
     return (
         <div className="h-screen bg-crema">
-            
             <NavBar />
             <div className="flex flex-col md:flex-row md:px-24">
                 <div>
+                    <SideBar />
                     <SitterList data={sitters} />
                 </div>
                 <SitterInfo users={users} />

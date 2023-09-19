@@ -20,7 +20,7 @@ const SitterList = ({data}) => {
         <div className="md:py-4">
             <FilterList />
             <h1 className="text-xl font-bold mb-4"> Cuidador </h1>
-                <div className="border h-[32rem] overflow-y-auto">
+                <div className="h-[32rem] overflow-y-auto">
                     <SitterListElement sitter={null}/>
                     {sitters.map((sitter, index) => (
                         <React.Fragment key={index}>

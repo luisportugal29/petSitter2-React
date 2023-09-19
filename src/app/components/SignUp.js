@@ -1,9 +1,20 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useRouter } from 'next/navigation';
+import { useSelector } from "react-redux";
+import { signUp } from "../../redux/features/auth-slice";
 
 const SignUp = () => {
+
+    //global state
+    const isAuth = useSelector(state => state.auth.value.isAuth);
+
+    //hooks
     const dispatch = useDispatch();
+    const router = useRouter();
+
+    //local state
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
     const [address, setAddress] = useState('');
@@ -22,23 +33,31 @@ const SignUp = () => {
         { name: 'Repetir Contraseña', value: passwordConfirmatiion, setter: setPasswordConfirmation },
     ];
 
-     const signUp = (e) => {
-        e.preventDefault();
+    useEffect(() => {
+        console.log(isAuth);
+        if ( isAuth )
+            router.push('/sitters');
+    },[isAuth]);
 
+     const handleSignUp = (e) => {
+        e.preventDefault();
         const user = { name, lastName, address, phoneNumber, email, password };
-        
+        dispatch(signUp(user));
 
     };
 
     return (
-        <div className="container mx-auto">
-            <h1 className='text-white text-5xl mb-10 font-bold'>Crear Cuenta</h1>
+        <div className="mx-auto">
+            <h1 className='text-white text-3xl md:text-5xl mb-10 font-bold'>Crear Cuenta</h1>
             <form
-             className="w-full grid grid-cols-3 gap-y-10 gap-x-6"
-             onSubmit={signUp}
+             className="w-full grid grid-cols-3 gap-y-6 md:gap-y-10 md:gap-x-6"
+             onSubmit={(e) => handleSignUp(e) }
             >
-               { elements.map(({name, value, setter}) => (
-                <div>
+               { elements.map(({name, value, setter}, index) => (
+                <div 
+                 className="col-span-3 md:col-span-1"
+                 key={index}
+                 >
                     <input 
                      className="bg-white w-full h-14 rounded-lg outline-0 p-2 text-black rounded-2xl"
                      placeholder={name}

@@ -13,8 +13,8 @@ const initialState = {
 
 export const signUp = createAsyncThunk('/auth/signup', async(user) => {
     try {
-        const user = await axios.post(`${API_URL}/signup`, user );
-        return user;
+        const {data : createdUser} = await axios.post(`${API_URL}/signup`, user );
+        return createdUser;
     } catch (error) {
         throw error;
     }
@@ -38,8 +38,9 @@ export const auth = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(signUp.fulfilled, (state, action) => {
-            state.value = {value: { isAuth: true, user: action.payload} };
+        builder
+        .addCase(signUp.fulfilled, (state, action) => {
+            state.value = { isAuth: true, user: action.payload};
         });
     }
 });
